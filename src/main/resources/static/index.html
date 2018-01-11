@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Query Bind</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<style type="text/css">
+.container {
+	height: 100px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.panel {
+	height: 410px;
+}
+
+.row {
+	padding-top: 10px;
+}
+</style>
+</head>
+<body>
+	<div id="mainDiv">
+		<div class="container panel panel-default">
+			<div class="panel-body">
+				<div id="inputDiv" class="row justify-content-center">
+					<div class="col-lg-10">
+						<textarea class="form-control" id="input" type="text" rows="8" placeholder="Paste the code from your console as the following example:"></textarea>
+					</div>
+					<div class="col-lg-2">
+						<button class="btn btn-lg btn-default" id="btnReplace">Replace</button>
+					</div>
+				</div>
+				<div id="outputDiv">
+					<div id="outputDiv" class="row justify-content-center">
+						<div class="col-lg-10">
+							<textarea class="form-control" id="output" type="text" rows="8" readonly></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() { 
+		$("#btnReplace").click(function() {
+			var param = { input : $("#input").val()};
+			$.ajax({
+				url : "/convertQuery",
+				type : "POST",
+				data : param,
+				success: function(data) {
+					$("#output").val(data);
+				},
+				error: function(data) {
+					$("#output").val("error: " + data);
+				}
+			});
+		});
+	});
+</script>
+</html>

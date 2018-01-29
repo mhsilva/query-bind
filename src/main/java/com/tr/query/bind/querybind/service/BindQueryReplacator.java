@@ -19,10 +19,12 @@ public class BindQueryReplacator {
 
     private String singleQuot = new String("'");
 
-    /*public static void main(String[] args) throws FileNotFoundException {
-        BindQueryReplacator bindQueryReplacator = new BindQueryReplacator();
-        bindQueryReplacator.createNewQuery(bindQueryReplacator.replaceBinds(bindQueryReplacator.getFileContents("OriginalQuery.sql")));
-    }*/
+    /*
+     * public static void main(String[] args) throws FileNotFoundException {
+     * BindQueryReplacator bindQueryReplacator = new BindQueryReplacator();
+     * bindQueryReplacator.createNewQuery(bindQueryReplacator.replaceBinds(bindQueryReplacator.getFileContents("OriginalQuery.sql")));
+     * }
+     */
 
     private void createNewQuery(String newSQL) {
         BufferedWriter writer = null;
@@ -56,9 +58,9 @@ public class BindQueryReplacator {
             if (count <= teste.length - 2) {
 
                 if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count])) {
-                    sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count] + singleQuot));
+                    sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count].substring(1) + singleQuot));
                 } else {
-                    sb.append(new StringBuilder(item).append(arrayParameters[count]));
+                    sb.append(new StringBuilder(item).append(arrayParameters[count].substring(1)));
                 }
             }
 
@@ -87,18 +89,20 @@ public class BindQueryReplacator {
         Pattern p = Pattern.compile("\\[(.*?)\\]");
         Matcher m = p.matcher(input);
         while (m.find()) {
-            input = m.group(1); // is your string. do what you want
+            input = m.group(1);
         }
-        return input.replaceAll("\\s+", "");
+        return input;
     }
 
     public List<String> getFileContents(String text) {
 
         List<String> listFile = new ArrayList<String>();
 
-       /* // Get file from resources folder
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile()); */
+        /*
+         * // Get file from resources folder
+         * ClassLoader classLoader = getClass().getClassLoader();
+         * File file = new File(classLoader.getResource(fileName).getFile());
+         */
 
         try (Scanner scanner = new Scanner(text)) {
 

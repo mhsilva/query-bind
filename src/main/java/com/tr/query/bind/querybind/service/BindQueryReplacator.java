@@ -57,10 +57,16 @@ public class BindQueryReplacator {
 
             if (count <= teste.length - 2) {
 
-                if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count])) {
-                    sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count].substring(1) + singleQuot));
-                } else {
-                    sb.append(new StringBuilder(item).append(arrayParameters[count].substring(1)));
+                try {
+
+                    if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count])) {
+                        sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count].substring(1) + singleQuot));
+                    } else {
+                        sb.append(new StringBuilder(item).append(arrayParameters[count].substring(1)));
+                    }
+
+                } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+                    // when is package the quantity of binds "?" they're not the same of parameters
                 }
             }
 

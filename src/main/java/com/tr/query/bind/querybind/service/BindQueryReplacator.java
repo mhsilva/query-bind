@@ -74,9 +74,11 @@ public class BindQueryReplacator {
 
         }
 
+        sb.delete(0, sb.lastIndexOf("Executing Statement:") + 20);
+
         sb.append(teste[teste.length - 1]);
 
-        return sb.toString();
+        return sb.toString().replaceAll("^\\s+", "");
 
     }
 

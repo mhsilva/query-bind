@@ -60,9 +60,11 @@ public class BindQueryReplacator {
                 try {
 
                     if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count])) {
-                        sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count].substring(1) + singleQuot));
+                        sb = (count == 0) ? sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count] + singleQuot))
+                            : sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count].substring(1) + singleQuot));
+
                     } else {
-                        sb.append(new StringBuilder(item).append(arrayParameters[count].substring(1)));
+                        sb = (count == 0) ? new StringBuilder(item).append(arrayParameters[count]) : sb.append(new StringBuilder(item).append(arrayParameters[count].substring(1)));
                     }
 
                 } catch (java.lang.ArrayIndexOutOfBoundsException e) {

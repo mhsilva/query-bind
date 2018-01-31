@@ -55,6 +55,9 @@
 						<div class="col-lg-10">
 							<textarea class="form-control" id="output" type="text" rows="8" readonly></textarea>
 						</div>
+						<div class="col-lg-2">
+							<button class="btn btn-lg btn-default" id="btnCopy"><span class="glyphicon glyphicon-copy"></span> Copy</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -76,6 +79,12 @@
 					$("#output").val("error: " + data);
 				}
 			});
+		});
+		$("#btnCopy").click(function() {
+			var copyText = document.getElementById("output");
+			copyText.select();
+			document.execCommand("Copy");
+			alert("Copied to clipboard!!");
 		});
 	});
 </script>

@@ -59,7 +59,7 @@ public class BindQueryReplacator {
 
                 try {
 
-                    if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count])) {
+                    if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count].replaceAll("^\\s+", ""))) {
                         sb = (count == 0) ? sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count] + singleQuot))
                             : sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count].substring(1) + singleQuot));
 

@@ -20,16 +20,9 @@ public class BindQueryReplacator {
     private Map<Integer, String[]> mapTypeAndParameters = new HashMap<Integer, String[]>();
 
     private String singleQuot = new String("'");
-    
+
     @Autowired
     private GenericCollectionServiceImpl service;
-
-    /*
-     * public static void main(String[] args) throws FileNotFoundException {
-     * BindQueryReplacator bindQueryReplacator = new BindQueryReplacator();
-     * bindQueryReplacator.createNewQuery(bindQueryReplacator.replaceBinds(bindQueryReplacator.getFileContents("OriginalQuery.sql")));
-     * }
-     */
 
     private void createNewQuery(String newSQL) {
         BufferedWriter writer = null;
@@ -55,12 +48,12 @@ public class BindQueryReplacator {
         String[] arrayParameters = mapTypeAndParameters.get(2);
         String[] arrayTypes = mapTypeAndParameters.get(3);
 
-        String[] teste = sqlOriginal.split("\\?");
+        String[] sqlOriginalArray = sqlOriginal.split("\\?");
         StringBuilder sb = new StringBuilder();
 
-        for (String item : teste) {
+        for (String item : sqlOriginalArray) {
 
-            if (count <= teste.length - 2) {
+            if (count <= sqlOriginalArray.length - 2) {
 
                 try {
 
@@ -83,9 +76,9 @@ public class BindQueryReplacator {
 
         sb.delete(0, sb.lastIndexOf("Executing Statement:") + 20);
 
-        sb.append(teste[teste.length - 1]);
+        sb.append(sqlOriginalArray[sqlOriginalArray.length - 1]);
         GenericCollection findByNome = service.findByNome("contador");
-        if (findByNome == null) { 
+        if (findByNome == null) {
             findByNome = new GenericCollection();
             findByNome.setCount(0);
             findByNome.setNome("contador");

@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BindQueryReplacator {
 
-    private Map<Integer, String[]> mapParametes = new HashMap<Integer, String[]>();
-
-    private Map<Integer, String[]> mapTypes = new HashMap<Integer, String[]>();
+    private Map<Integer, String[]> mapTypeAndParameters = new HashMap<Integer, String[]>();
 
     private String singleQuot = new String("'");
     
@@ -54,8 +52,8 @@ public class BindQueryReplacator {
         int count = 0;
 
         String sqlOriginal = list.get(0);
-        String[] arrayParameters = mapParametes.get(2);
-        String[] arrayTypes = mapTypes.get(3);
+        String[] arrayParameters = mapTypeAndParameters.get(2);
+        String[] arrayTypes = mapTypeAndParameters.get(3);
 
         String[] teste = sqlOriginal.split("\\?");
         StringBuilder sb = new StringBuilder();
@@ -66,7 +64,7 @@ public class BindQueryReplacator {
 
                 try {
 
-                    if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count])) {
+                    if ("java.lang.String".equals(arrayTypes[count].replaceAll("^\\s+", "")) && !"null".equals(arrayParameters[count].replaceAll("^\\s+", ""))) {
                         sb = (count == 0) ? sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count] + singleQuot))
                             : sb.append(new StringBuilder(item).append(singleQuot + arrayParameters[count].substring(1) + singleQuot));
 
@@ -102,9 +100,9 @@ public class BindQueryReplacator {
         int count) {
 
         if (count == 2) {
-            mapParametes.put(2, getStringInsideBracket(line).split(","));
+            mapTypeAndParameters.put(2, getStringInsideBracket(line).split(","));
         } else if (count == 3) {
-            mapTypes.put(3, getStringInsideBracket(line).split(","));
+            mapTypeAndParameters.put(3, getStringInsideBracket(line).split(","));
         }
     }
 

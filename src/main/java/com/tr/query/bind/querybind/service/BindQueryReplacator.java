@@ -11,6 +11,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class BindQueryReplacator {
 
     private Map<Integer, String[]> mapParametes = new HashMap<Integer, String[]>();
@@ -18,6 +22,9 @@ public class BindQueryReplacator {
     private Map<Integer, String[]> mapTypes = new HashMap<Integer, String[]>();
 
     private String singleQuot = new String("'");
+    
+    @Autowired
+    private GenericCollectionServiceImpl service;
 
     /*
      * public static void main(String[] args) throws FileNotFoundException {
@@ -79,7 +86,14 @@ public class BindQueryReplacator {
         sb.delete(0, sb.lastIndexOf("Executing Statement:") + 20);
 
         sb.append(teste[teste.length - 1]);
-
+        GenericCollection findByNome = service.findByNome("contador");
+        if (findByNome == null) { 
+            findByNome = new GenericCollection();
+            findByNome.setCount(0);
+            findByNome.setNome("contador");
+        }
+        findByNome.setCount(findByNome.getCount() + 1);
+        service.save(findByNome);
         return sb.toString().replaceAll("^\\s+", "");
 
     }

@@ -60,12 +60,22 @@
 						</div>
 					</div>
 				</div>
+				<div id="contDiv">
+					<div id="contDiv" class="row justify-content-center">
+						<div class="col-lg-4"></div>
+						<div class="col-lg-4">
+							This application have helped you <span id="cont"></span> times already.
+						</div>
+						<div class="col-lg-4"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
-	$(document).ready(function() { 
+	$(document).ready(function() {
+		getCont(); 
 		$("#btnReplace").click(function() {
 			var param = { input : $("#input").val()};
 			$.ajax({
@@ -79,6 +89,7 @@
 					$("#output").val("error: " + data);
 				}
 			});
+			getCont();
 		});
 		$("#btnCopy").click(function() {
 			var copyText = document.getElementById("output");
@@ -87,5 +98,17 @@
 			alert("Copied to clipboard!!");
 		});
 	});
+	this.getCont = function() {
+		$.ajax({
+			url : "/contador",
+			type : "GET",
+			success: function(data) {
+				$("#cont").text(data);
+			},
+			error: function(data) {
+				$("#cont").text("error: " + data);
+			}
+		});
+	};
 </script>
 </html>

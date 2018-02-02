@@ -13,9 +13,7 @@ import java.util.regex.Pattern;
 
 public class BindQueryReplacator {
 
-    private Map<Integer, String[]> mapParametes = new HashMap<Integer, String[]>();
-
-    private Map<Integer, String[]> mapTypes = new HashMap<Integer, String[]>();
+    private Map<Integer, String[]> mapTypeAndParameters = new HashMap<Integer, String[]>();
 
     private String singleQuot = new String("'");
 
@@ -47,8 +45,8 @@ public class BindQueryReplacator {
         int count = 0;
 
         String sqlOriginal = list.get(0);
-        String[] arrayParameters = mapParametes.get(2);
-        String[] arrayTypes = mapTypes.get(3);
+        String[] arrayParameters = mapTypeAndParameters.get(2);
+        String[] arrayTypes = mapTypeAndParameters.get(3);
 
         String[] teste = sqlOriginal.split("\\?");
         StringBuilder sb = new StringBuilder();
@@ -88,9 +86,9 @@ public class BindQueryReplacator {
         int count) {
 
         if (count == 2) {
-            mapParametes.put(2, getStringInsideBracket(line).split(","));
+            mapTypeAndParameters.put(2, getStringInsideBracket(line).split(","));
         } else if (count == 3) {
-            mapTypes.put(3, getStringInsideBracket(line).split(","));
+            mapTypeAndParameters.put(3, getStringInsideBracket(line).split(","));
         }
     }
 

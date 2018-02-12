@@ -74,9 +74,10 @@ public class BindQueryReplacator {
 
         }
 
+        sb.append(sqlOriginalArray[sqlOriginalArray.length - 1]);
+
         sb.delete(0, sb.lastIndexOf("Executing Statement:") + 20);
 
-        sb.append(sqlOriginalArray[sqlOriginalArray.length - 1]);
         GenericCollection findByNome = service.findByNome("contador");
         if (findByNome == null) {
             findByNome = new GenericCollection();
@@ -92,11 +93,9 @@ public class BindQueryReplacator {
     private void getParameters(String line,
         int count) {
 
-        if (count == 2) {
-            mapTypeAndParameters.put(2, getStringInsideBracket(line).split(","));
-        } else if (count == 3) {
-            mapTypeAndParameters.put(3, getStringInsideBracket(line).split(","));
-        }
+        if (count != 1)
+            mapTypeAndParameters.put(count, getStringInsideBracket(line).split(","));
+
     }
 
     private String getStringInsideBracket(String input) {

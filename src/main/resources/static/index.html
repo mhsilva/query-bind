@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><link rel="stylesheet" type="text/css" href="snackbar.css"></head>
 <meta charset="UTF-8">
 <title>Troca-troca Tools</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -44,7 +44,8 @@
 			<div class="panel-body">
 				<div id="inputDiv" class="row justify-content-center">
 					<div class="col-lg-10">
-						<textarea class="form-control" id="input" type="text" rows="10" placeholder="Paste the code from your console as the following example:"></textarea>
+						<textarea class="form-control" id="input" type="text" rows="10"
+							placeholder="Paste the code from your console as the following example:"></textarea>
 					</div>
 					<div class="col-lg-2">
 						<button class="btn btn-lg btn-default" id="btnReplace">Replace</button>
@@ -53,10 +54,13 @@
 				<div id="outputDiv">
 					<div id="outputDiv" class="row justify-content-center">
 						<div class="col-lg-10">
-							<textarea class="form-control" id="output" type="text" rows="8" readonly></textarea>
+							<textarea class="form-control" id="output" type="text" rows="8"
+								readonly></textarea>
 						</div>
 						<div class="col-lg-2">
-							<button class="btn btn-lg btn-default" id="btnCopy"><span class="glyphicon glyphicon-copy"></span> Copy</button>
+							<button class="btn btn-lg btn-default" id="btnCopy">
+								<span class="glyphicon glyphicon-copy"></span> Copy
+							</button>
 						</div>
 					</div>
 				</div>
@@ -64,7 +68,8 @@
 					<div id="contDiv" class="row justify-content-center">
 						<div class="col-lg-4"></div>
 						<div class="col-lg-4">
-							This application have helped you <span id="cont"></span> times already.
+							This application have helped you <span id="cont"></span> times
+							already.
 						</div>
 						<div class="col-lg-4"></div>
 					</div>
@@ -72,6 +77,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- The actual snackbar -->
+	<div id="snackbar">Copied to clipboard!!</div>
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -96,7 +103,8 @@
 			var copyText = document.getElementById("output");
 			copyText.select();
 			document.execCommand("Copy");
-			alert("Copied to clipboard!!");
+			//alert("Copied to clipboard!!");
+			myFunctionSnack();
 		});
 	});
 	this.getCont = function() {
@@ -111,5 +119,17 @@
 			}
 		});
 	};
+
+	function myFunctionSnack() {
+	    // Get the snackbar DIV
+	    var x = document.getElementById("snackbar")
+
+	    // Add the "show" class to DIV
+	    x.className = "show";
+
+	    // After 3 seconds, remove the show class from DIV
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	}
+	
 </script>
 </html>

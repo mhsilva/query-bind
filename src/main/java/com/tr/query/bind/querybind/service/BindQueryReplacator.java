@@ -1,8 +1,5 @@
 package com.tr.query.bind.querybind.service;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,23 +20,6 @@ public class BindQueryReplacator {
 
     @Autowired
     private GenericCollectionServiceImpl service;
-
-    private void createNewQuery(String newSQL) {
-        BufferedWriter writer = null;
-        try {
-
-            writer = new BufferedWriter(new FileWriter("src/main/resources/" + "/NewQuery.sql"));
-            writer.write(newSQL);
-
-        } catch (IOException e) {
-        } finally {
-            try {
-                if (writer != null)
-                    writer.close();
-            } catch (IOException e) {
-            }
-        }
-    }
 
     public String replaceBinds(List<String> list) {
         int count = 0;

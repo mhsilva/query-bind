@@ -1,0 +1,36 @@
+databaseChangeLog:
+    - changeSet:
+        id: 1
+        author: matheus.silva
+        comment: "Database initialization."
+        changes:
+            - dropTable:
+                tableName: generic_collection
+            - createTable:
+                tableName: generic_collection
+                columns:
+                    - column:
+                        name: id
+                        type: varchar(255)
+                        constraints:
+                            primaryKey: true
+                            nullable: false
+                    - column:
+                        name: name
+                        type: varchar(255)
+                    - column:
+                        name: value
+                        type: varchar(255)
+            - insert:
+                tableName: generic_collection
+                columns:
+                  - column:
+                      name: id
+                      value: 1
+                  - column:
+                      name: name
+                      value: "count"
+                  - column:
+                      name: value
+                      value: 1488
+                      

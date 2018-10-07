@@ -8,8 +8,8 @@ public class GenericCollectionServiceImpl {
     @Autowired
     private GenericCollectionRepo repo;
     
-    public GenericCollection findByNome(String nome) {
-        GenericCollection findByNome = repo.findByNome(nome);
+    public GenericCollection findByName(String name) {
+        GenericCollection findByNome = repo.findByName(name);
         return findByNome;
     }
     

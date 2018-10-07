@@ -1,7 +1,9 @@
 package com.tr.query.bind.querybind.service;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface GenericCollectionRepo extends MongoRepository<GenericCollection, String> {
-    public GenericCollection findByNome(String nome);
+@Repository
+public interface GenericCollectionRepo extends CrudRepository<GenericCollection, Long> {
+    public GenericCollection findByName(String name);
 }

@@ -27,11 +27,11 @@ public class BindController {
     }
     
     @RequestMapping(path="/contador", method=RequestMethod.GET)
-    public @ResponseBody int convertQuery(){
-        GenericCollection findByNome = service.findByNome("contador");
+    public @ResponseBody String convertQuery(){
+        GenericCollection findByNome = service.findByName("count");
         if (findByNome == null) {
-            return 0;
+            return "0";
         }
-        return findByNome.getCount();
+        return findByNome.getValue();
     }
 }

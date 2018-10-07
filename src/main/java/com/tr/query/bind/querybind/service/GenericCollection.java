@@ -1,69 +1,34 @@
 package com.tr.query.bind.querybind.service;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Document(collection = "genericCollection")
+@Entity
 public class GenericCollection {
 
-    @Id
-    private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	private String name;
 
-    private String nome;
+	private String value;
 
-    private int count;
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * Gets the attribute id.
-     *
-     * @return id.
-     */
-    public String getId() {
-        return id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    /**
-     * Sets the attribute id.
-     *
-     * @param id to set the id.
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    /**
-     * Gets the attribute nome.
-     *
-     * @return nome.
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * Sets the attribute nome.
-     *
-     * @param nome to set the nome.
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * Gets the attribute count.
-     *
-     * @return count.
-     */
-    public int getCount() {
-        return count;
-    }
-
-    /**
-     * Sets the attribute count.
-     *
-     * @param count to set the count.
-     */
-    public void setCount(int count) {
-        this.count = count;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

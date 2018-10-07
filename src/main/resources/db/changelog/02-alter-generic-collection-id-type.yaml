@@ -1,0 +1,10 @@
+databaseChangeLog:
+    - changeSet:
+        id: 1
+        author: matheus.silva
+        comment: "Alter ID type to BIGINT."
+        changes:
+            - modifyDataType:
+                tableName: generic_collection
+                columnName: id
+                newDataType: bigint

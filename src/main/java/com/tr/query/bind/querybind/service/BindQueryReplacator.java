@@ -78,13 +78,13 @@ public class BindQueryReplacator {
 
         sb.delete(0, sb.lastIndexOf("Executing Statement:") + 20);
 
-        GenericCollection findByNome = service.findByNome("contador");
+        GenericCollection findByNome = service.findByName("count");
         if (findByNome == null) {
             findByNome = new GenericCollection();
-            findByNome.setCount(0);
-            findByNome.setNome("contador");
+            findByNome.setValue("0");
+            findByNome.setName("count");
         }
-        findByNome.setCount(findByNome.getCount() + 1);
+        findByNome.setValue(String.valueOf(Integer.parseInt(findByNome.getValue()) + 1));
         service.save(findByNome);
         return sb.toString().replaceAll("^\\s+", "");
 

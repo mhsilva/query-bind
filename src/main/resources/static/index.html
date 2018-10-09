@@ -181,6 +181,7 @@
 
 <body>
 	<div class="corner-ribbon top-left sticky black shadow" id="ribbonMurilo"></div>
+	<div class="corner-ribbon top-left sticky black shadow" id="ribbonMurilo2" hidden>IT IS TODAY!!!</div>
 	<div id="mainDiv">
 		<div class="container panel panel-default">
 			<div class="panel-body">
@@ -248,6 +249,8 @@
 			document.execCommand("Copy");
 			//alert("Copied to clipboard!!");
 			myFunctionSnack();
+			$("#ribbonMurilo").toggle();
+			$("#ribbonMurilo2").toggle();
 		});
 	});
 	this.getCont = function () {
@@ -274,6 +277,8 @@
 		setTimeout(function () {
 			x.className = x.className.replace("show", "");
 		}, 3000);
+
+		
 	}
 
 	// Update the count down every 1 second

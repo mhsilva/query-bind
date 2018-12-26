@@ -110,8 +110,8 @@
 	}
 
 	.corner-ribbon.top-right {
-		top: 25px;
-		right: -50px;
+		top: 70px;
+		right: -80px;
 		left: auto;
 		transform: rotate(45deg);
 		-webkit-transform: rotate(45deg);
@@ -182,6 +182,8 @@
 <body>
 	<div class="corner-ribbon top-left sticky black shadow" id="ribbonMurilo"></div>
 	<div class="corner-ribbon top-left sticky black shadow" id="ribbonMurilo2" hidden>IT IS TODAY!!!</div>
+	<div class="corner-ribbon top-right sticky black shadow" id="ribbonWill"></div>
+	<div class="corner-ribbon top-right sticky black shadow" id="ribbonWill2" hidden>IT IS TODAY!!!</div>
 	<div id="mainDiv">
 		<div class="container panel panel-default">
 			<div class="panel-body">
@@ -251,6 +253,8 @@
 			myFunctionSnack();
 			$("#ribbonMurilo").toggle();
 			$("#ribbonMurilo2").toggle();
+			$("#ribbonWill").toggle();
+			$("#ribbonWill2").toggle();
 		});
 	});
 	this.getCont = function () {
@@ -306,6 +310,33 @@
 		if (distance < 0) {
 			clearInterval(x);
 			$("#ribbonMurilo").text("EXPIRED");
+		}
+	}, 1000);
+	
+	var y = setInterval(function () {
+		// Set the date we're counting down to
+		var countDownDate = new Date("Dec 20, 2018 00:00:01").getTime(); 
+		
+		// Get todays date and time
+		var now = new Date().getTime();
+
+		// Find the distance between now and the count down date
+		var distance = countDownDate - now;
+
+		// Time calculations for days, hours, minutes and seconds
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+		// Display the result in the element with id="demo"
+		$("#ribbonWill").text("Will - " + days + "d " + hours + "h "
+			+ minutes + "m " + seconds + "s ");
+
+		// If the count down is finished, write some text 
+		if (distance < 0) {
+			clearInterval(x);
+			$("#ribbonWill").text("EXPIRED");
 		}
 	}, 1000);
 

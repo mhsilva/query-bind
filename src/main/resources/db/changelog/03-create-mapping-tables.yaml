@@ -1,0 +1,96 @@
+databaseChangeLog:
+    - changeSet:
+        id: 3
+        author: matheus.silva
+        comment: "Mapping tables."
+        changes:
+          - createTable:
+              tableName: menu
+              columns:
+                - column:
+                    name: menu_id
+                    type: varchar(255)
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: name
+                    type: varchar(255)
+                - column:
+                    name: description
+                    type: varchar(4000)
+          - createTable:
+              tableName: screen
+              columns:
+                - column:
+                    name: screen_id
+                    type: varchar(255)
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: screen_number
+                    type: varchar(255)
+                - column:
+                    name: usage
+                    type: varchar(4000)
+                - column:
+                    name: menu_id
+                    type: varchar(255)
+          - addForeignKeyConstraint:
+              baseColumnNames: menu_id
+              baseTableName: screen
+              constraintName: fk_screen_menu_id
+              onDelete: CASCADE
+              referencedColumnNames: menu_id
+              referencedTableName: menu
+          - createTable:
+              tableName: backend_call
+              columns:
+                - column:
+                    name: backend_call_id
+                    type: varchar(255)
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: backend_url
+                    type: varchar(4000)
+                - column:
+                    name: description
+                    type: varchar(4000)
+                - column:
+                    name: screen_id
+                    type: varchar(255)
+          - addForeignKeyConstraint:
+              baseColumnNames: screen_id
+              baseTableName: backend_call
+              constraintName: fk_backend_call_screen_id
+              onDelete: CASCADE
+              referencedColumnNames: screen_id
+              referencedTableName: screen        
+          - createTable:
+              tableName: query
+              columns:
+                - column:
+                    name: query_id
+                    type: varchar(255)
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: query_name
+                    type: varchar(4000)
+                - column:
+                    name: description
+                    type: varchar(4000)
+                - column:
+                    name: backend_call_id
+                    type: varchar(255)
+          - addForeignKeyConstraint:
+              baseColumnNames: backend_call_id
+              baseTableName: query
+              constraintName: fk_query_backend_call_id
+              onDelete: CASCADE
+              referencedColumnNames: backend_call_id
+              referencedTableName: backend_call  

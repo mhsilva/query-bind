@@ -3,3 +3,4 @@ databaseChangeLog:
   - include:
       file: db/changelog/01-database-creation.yaml
       file: db/changelog/02-alter-generic-collection-id-type.yaml
+      file: db/changelog/03-create-mapping-tables.yaml

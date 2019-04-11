@@ -9,8 +9,8 @@ spring:
           lob:
             non_contextual_creation: true
   datasource:
-    url: jdbc:postgresql://querybind.cstwej4zhzyv.sa-east-1.rds.amazonaws.com:5432/querybind
-    username: querybind
-    password: querybind
+    url: jdbc:postgresql://ec2-54-225-242-183.compute-1.amazonaws.com:5432/dem7nms0n322tm
+    username: bhskmkgmoxaohe
+    password: f4750f814e691f52de2414aa53dafce118b477fdf486847d3231fcb9542f837c
   liquibase:
     default-schema: public
